@@ -47,14 +47,7 @@ const appendPageLinks = () => {
     }
 
     div.addEventListener('click', (e) => {
-        for (let i = 0; i < page; i++) {
-            let links = document.querySelectorAll('a');
-            links[i].classList.remove('active');
-        }
-        if (e.target.tagName === 'A') {
-            showPage(studentList);
-            e.target.className = 'active';
-        }
+
     });
 }
 
