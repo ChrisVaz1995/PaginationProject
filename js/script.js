@@ -32,8 +32,7 @@ const showPage = (list, page) => {
 showPage(studentList, page);
 // Create and append the pagination links - Creating a function that can do this is a good approach
 
-const appendPageLinks = () => {
-    let divide = Math.ceil(studentList.length / 10);
+const appendPageLinks = (divide) => {
     let div = document.createElement('div');
     div.className = 'pagination';
     for (let i = 0; i < page; i++) {
@@ -45,27 +44,22 @@ const appendPageLinks = () => {
         ul.appendChild(li);
         li.appendChild(a);
     }
+
+    pagination.addEventListener('click', (e) => {
+        for (let i = 0; i < page; i++) {
+            removeActive[i].classList.remove('active');
+        }
+        if (event.target.tagName === 'A') {
+            showPage(studentList, divide);
+            event.target.className = 'active';
+        }
+    });
+
 }
 
 
 
-
-pagination.addEventListener('click', (e) => {
-    for (let i = 0; i < divide; i++) {
-        let active = document.querySelector('active');
-        active[i].classList.remove('active');
-        if (document.querySelector('.pagination') !== null) {
-            let removePag = document.querySelector('.pagination');
-            let div = document.querySelector('.pagination');
-            removePag.removeChild(div);
-        }
-    }
-    if (e.target.tagName === 'A') {
-        showPage(studentList, 1);
-    }
-});
-
-appendPageLinks(studentList);
+appendPageLinks(divide);
 showPage(studentList, 1);
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
