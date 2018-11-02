@@ -45,14 +45,28 @@ const appendPageLinks = () => {
         ul.appendChild(li);
         li.appendChild(a);
     }
-
-    div.addEventListener('click', (e) => {
-
-    });
 }
 
-appendPageLinks();
-showPage(studentList);
+
+
+
+pagination.addEventListener('click', (e) => {
+    for (let i = 0; i < divide; i++) {
+        let active = document.querySelector('active');
+        active[i].classList.remove('active');
+        if (document.querySelector('.pagination') !== null) {
+            let removePag = document.querySelector('.pagination');
+            let div = document.querySelector('.pagination');
+            removePag.removeChild(div);
+        }
+    }
+    if (e.target.tagName === 'A') {
+        showPage(studentList, 1);
+    }
+});
+
+appendPageLinks(studentList);
+showPage(studentList, 1);
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
 // Tip: If you created a function above to show/hide list items, it could be helpful here
