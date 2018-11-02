@@ -45,12 +45,13 @@ const appendPageLinks = (divide) => {
         li.appendChild(a);
     }
 
+    const removeActive = document.querySelectorAll('div', 'li', 'a');
     pagination.addEventListener('click', (e) => {
-        for (let i = 0; i < page; i++) {
+        for (let i = 0; i < divide; i++) {
             removeActive[i].classList.remove('active');
         }
         if (event.target.tagName === 'A') {
-            showPage(studentList, divide);
+            showPage(studentList, page);
             event.target.className = 'active';
         }
     });
@@ -60,7 +61,7 @@ const appendPageLinks = (divide) => {
 
 
 appendPageLinks(divide);
-showPage(studentList, 1);
+showPage(studentList, page);
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
 // Tip: If you created a function above to show/hide list items, it could be helpful here
