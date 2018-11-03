@@ -10,6 +10,7 @@ const page = document.querySelector('.page');
 const pagination = document.querySelector('.pagination');
 const divide = Math.ceil(studentList.length / 10);
 const pageNumber = 1;
+const arrayOfLinks = document.querySelectorAll('div', 'li', 'a');
 
 
 
@@ -17,7 +18,7 @@ const pageNumber = 1;
 // Create a function to hide all of the items in the list excpet for the ten you want to show
 // Tip: Keep in mind that with a list of 54 students, the last page will only display four
 
-const showPage = (list, page) => {
+const showPage = (list, pageNumber) => {
     let min = pageNumber * 10 - 10;
     let max = pageNumber * 10 - 1;
     for (let i = 0; i < list.length; i++) {
@@ -29,10 +30,10 @@ const showPage = (list, page) => {
     }
 }
 
-showPage(studentList, page);
+showPage(studentList, 1);
 // Create and append the pagination links - Creating a function that can do this is a good approach
 
-const appendPageLinks = (divide) => {
+const appendPageLinks = (list) => {
     let div = document.createElement('div');
     div.className = 'pagination';
     for (let i = 0; i < page; i++) {
@@ -40,19 +41,16 @@ const appendPageLinks = (divide) => {
         let li = document.createElement('li');
         let a = document.createElement('a');
         a.innerHTML = 'href', '#';
-        ul.appendChild(div);
         ul.appendChild(li);
         li.appendChild(a);
     }
 
-    const removeActive = document.querySelectorAll('div', 'li', 'a');
+    const removeActive = document.querySelector('arrayOfLinks');
     pagination.addEventListener('click', (e) => {
+        showPage(studentList, e.target.innerHTML);
+        e.preventDefault();
         for (let i = 0; i < page; i++) {
             removeActive[i].classList.remove('active');
-        }
-        if (e.target.tagName === 'A') {
-            showPage(studentList, page);
-            e.target.className = 'active';
         }
     });
 
