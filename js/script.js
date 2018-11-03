@@ -18,8 +18,8 @@ const pageNumber = 1;
 // Tip: Keep in mind that with a list of 54 students, the last page will only display four
 
 const showPage = (list, page) => {
-    let min = pageNumber * 11 - 10;
-    let max = pageNumber * 10;
+    let min = pageNumber * 10 - 10;
+    let max = pageNumber * 10 - 1;
     for (let i = 0; i < list.length; i++) {
         if (i >= min && i <= max) {
             list[i].style.display = 'block';
@@ -47,12 +47,12 @@ const appendPageLinks = (divide) => {
 
     const removeActive = document.querySelectorAll('div', 'li', 'a');
     pagination.addEventListener('click', (e) => {
-        for (let i = 0; i < divide; i++) {
+        for (let i = 0; i < page; i++) {
             removeActive[i].classList.remove('active');
         }
-        if (event.target.tagName === 'A') {
+        if (e.target.tagName === 'A') {
             showPage(studentList, page);
-            event.target.className = 'active';
+            e.target.className = 'active';
         }
     });
 
@@ -60,8 +60,7 @@ const appendPageLinks = (divide) => {
 
 
 
-appendPageLinks(divide);
-showPage(studentList, page);
+appendPageLinks(studentList);
 
 // Add functionality to the pagination buttons so that they show and hide the correct items
 // Tip: If you created a function above to show/hide list items, it could be helpful here
